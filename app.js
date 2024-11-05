@@ -1,52 +1,4 @@
-// import { getAuth,createUserWithEmailAndPassword } from "./firebase.js";
 
-// const auth = getAuth();
-
-// let signupBtn =document.getElementById("signupBtn");
-// let userEmail = document.getElementById("email")
-// let userPassword = document.getElementById("password")
-// // Email validation regex
-// const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-// function isValidEmail(userEmail) {
-//   return emailRegex.test(userEmail);
-// }
-// signupBtn.addEventListener("click",()=>{
-//   if(userEmail.value.trim() && userPassword.value.trim())
-
-//   // Validate email format
-//   if (!isValidEmail(userEmail)) {
-//     alert("Please enter a valid email address.");
-//     return; // Exit the function if the email is invalid
-//   }
-
-//   if (userEmail && userPassword) {
-//     signupBtn.disabled = true; 
-//   createUserWithEmailAndPassword(auth,userEmail.value,userPassword.value)
-//   .then((userCredential) => {
-//     // Signed up 
-//     const user = userCredential.user;
-//     console.log(user)
-//       // Redirect to sign-in page
-//       location.href = "signin.html";
-//   })
-//   .catch((error) => {
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     console.log(errorMessage);
-  
-    
-//   }  
-// )
-// .finally(() => {
-//   signupBtn.disabled = false; // Re-enable button after the process
-// });
-// } else {
-// alert("Please fill in both email and password.");
-// }
-
-//   //location.href="signin.html"
-// })
 
 import { getAuth, createUserWithEmailAndPassword } from "./firebase.js";
 
@@ -69,16 +21,32 @@ signupBtn.addEventListener("click", () => {
 
   // Validate that both fields are filled
   if (!email || !password) {
-    alert("Please fill in both email and password.");
+    Swal.fire({
+      icon: 'warning',
+      title: 'Missing Information',
+      text: 'Please fill in both email and password.',
+    });
     return;
   }
 
   // Validate email format
   if (!isValidEmail(email)) {
-    alert("Please enter a valid email address.");
+    Swal.fire({
+      icon: 'error',
+      title: 'Invalid Email',
+      text: 'Please enter a valid email address.',
+    });
     return; // Exit the function if the email is invalid
   }
-
+  // Validate password strength
+  if (password.length < 6) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Weak Password',
+      text: 'Password must be at least 6 characters long.',
+    });
+    return; // Exit the function if the password is too weak
+  }
   signupBtn.disabled = true; // Prevent multiple clicks during signup
 
   createUserWithEmailAndPassword(auth, email, password)
@@ -86,14 +54,24 @@ signupBtn.addEventListener("click", () => {
       // Signed up successfully
       const user = userCredential.user;
       console.log("User signed up:", user);
-
-      // Redirect to sign-in page
-      location.href = "signin.html";
+      Swal.fire({
+        icon: 'success',
+        title: 'Registration Successful',
+        text: 'You have been registered successfully! Redirecting to sign-in page...',
+      }).then(() => {
+        // Redirect to sign-in page
+        location.href = "signin.html";
+      });
+     
     })
     .catch((error) => {
       const errorMessage = error.message;
       console.error("Error signing up:", errorMessage);
-      alert(`Error: ${errorMessage}`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Registration Failed',
+        text: `Error: ${errorMessage}`,
+      });
     })
     .finally(() => {
       signupBtn.disabled = false; // Re-enable button after the process

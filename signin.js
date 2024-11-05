@@ -20,29 +20,58 @@ loginBtn.addEventListener("click", () => {
   if (email && password) {
     // Validate email format
     if (!isValidEmail(email)) {
-      alert("Please enter a valid email address.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Email',
+        text: 'Please enter a valid email address.',
+      });
       return; // Exit the function if the email is invalid
     }
+      // Validate password length
+      if (password.length < 6) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Weak Password',
+          text: 'Password must be at least 6 characters long.',
+        });
+        return; // Exit the function if the password is too short
+      }
 
     loginBtn.disabled = true; // Prevent multiple clicks during login
 
     signInWithEmailAndPassword(auth, email, password)
+
       .then((userCredential) => {
         const user = userCredential.user;
         console.log("User signed in:", user);
+        Swal.fire({
+          icon: 'success',
+          title: 'Login Successful',
+          text: 'You have been signed in successfully!',
+        }).then(() => {
+          location.href = "profile.html"; 
+        });
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error("Error signing in:", errorMessage);
-        alert(`Error: ${errorMessage}`);
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: `Error: ${errorMessage}`,
+        });
       })
       .finally(() => {
         loginBtn.disabled = false; 
       });
   } else {
-    alert("Please fill in both email and password.");
+    Swal.fire({
+      icon: 'warning',
+      title: 'Missing Fields',
+      text: 'Please fill in both email and password.',
+    });
   }
 
-  location.href="profile.html"
+ 
 });
