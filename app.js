@@ -1,9 +1,9 @@
 
 
-import { getAuth, createUserWithEmailAndPassword } from "./firebase.js";
+import { getAuth, createUserWithEmailAndPassword ,GoogleAuthProvider,provider,signInWithPopup } from "./firebase.js";
 
 const auth = getAuth();
-
+//const provider = new GoogleAuthProvider();
 let signupBtn = document.getElementById("signupBtn");
 let userEmail = document.getElementById("email");
 let userPassword = document.getElementById("password");
@@ -77,4 +77,31 @@ signupBtn.addEventListener("click", () => {
       signupBtn.disabled = false; // Re-enable button after the process
     });
 });
+
+let googleBtn = document.getElementById("googleBtn")
+
+googleBtn.addEventListener("click",()=>{
+  signInWithPopup(auth, provider)
+  .then((result) => {
+    
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    
+    const user = result.user;
+    console.log(user);
+    
+   
+  }).catch((error) => {
+    
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    
+    const email = error.customData.email;
+   
+    const credential = GoogleAuthProvider.credentialFromError(error);
+   console.log(errorMessage);
+   
+  });
+
+})
 
