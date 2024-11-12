@@ -262,7 +262,9 @@ let profilePage = document.getElementById("profile-page");
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    console.log(user);
+    const uid = user.uid;
+    console.log("User UID:", uid);
+   // console.log(user);
     profilePage.innerHTML = `
       <div class="card mb-4 shadow-sm rounded-3">
         <div class="card-body p-4">
@@ -301,6 +303,7 @@ onAuthStateChanged(auth, (user) => {
             <button type="button" class="btn btn-primary" id="verifyEmail">Verify Email</button>
             <button type="button" class="btn btn-warning" id="updateProfile">Update Profile</button>
             <button type="button" class="btn btn-danger" id="signOut">Sign Out</button>
+             <button type="button" class="btn btn-info" id="post">Create a Post</button>
           </div>
         </div>
       </div>
@@ -378,7 +381,17 @@ onAuthStateChanged(auth, (user) => {
   } else {
     profilePage.innerHTML = "<p class='text-center mt-5'>No user is currently signed in.</p>";
   }
+  document.getElementById("post").addEventListener("click", () => {
+    console.log("Navigating to post.html");
+    location.href = "post.html";
+  });
+
+
+
 });
+
+
+
 
 
    
