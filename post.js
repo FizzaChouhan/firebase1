@@ -1,4 +1,4 @@
-import{db,collection, addDoc ,setDoc,doc, getDocs}from"./firebase.js"
+import{db,collection, addDoc ,setDoc,doc, getDocs,deleteDoc,updateDoc}from"./firebase.js"
 let postTitle = document.getElementById("postTitle")
 let content = document.getElementById("postContent")
 
@@ -8,7 +8,7 @@ post.addEventListener("click",async()=>{
 let content = document.getElementById("postContent")
 
     try {
-        // const docRef = await addDoc(collection(db, "posts"), {
+        
         //  inputs:inputs.value,
         //  text:text.value
         
@@ -17,7 +17,7 @@ let content = document.getElementById("postContent")
            content:content.value,
           
         });
-        console.log("Document written with ID: ", docRef.id);
+        
       } catch (e) {
         console.error("Error adding document: ", e);
       }
@@ -36,7 +36,8 @@ getpost.addEventListener("click",async()=>{
         
         const querySnapshot = await getDocs(collection(db, "posts"));
         querySnapshot.forEach((doc) => {
-          console.log(`${doc.id} => ${doc.data()}`);
+        let docss=`${doc.id} => ${doc.data()}`
+        console.log(docss)
           
         });
         
@@ -46,3 +47,32 @@ getpost.addEventListener("click",async()=>{
     
     
 })
+
+let delpost= document.getElementById("delpost")
+delpost.addEventListener("click",async()=>{
+  try {
+    const docRef = await deleteDoc(doc(db, "posts", "uid"));
+    console.log("Document deleted with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error deleting document: ", e);
+      }
+      })
+
+
+    
+let updpost = document.getElementById("updpost");
+
+updpost.addEventListener("click", async () => {
+  
+  const userRef = doc(db, "posts", "uid"); 
+
+  try {
+    await updateDoc(userRef, {
+      postTitle: prompt("Update title") ,
+      content: prompt("Update content") 
+    });
+    console.log("Data updated successfully"); 
+  } catch (e) {
+    console.error("Error updating data:", e); 
+  }
+});
