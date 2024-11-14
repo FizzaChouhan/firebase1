@@ -18,7 +18,7 @@ function isValidEmail(email) {
 signupBtn.addEventListener("click", () => {
   const email = userEmail.value.trim();
   const password = userPassword.value.trim();
-
+  
   // Validate that both fields are filled
   if (!email || !password) {
     Swal.fire({

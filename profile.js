@@ -331,6 +331,7 @@ onAuthStateChanged(auth, (user) => {
         preConfirm: () => {
           const userName = document.getElementById('userName').value;
           const userPic = document.getElementById('userPic').value;
+         
           if (!userName || !userPic) {
             Swal.showValidationMessage('Both name and picture URL are required');
             return false;
@@ -341,7 +342,8 @@ onAuthStateChanged(auth, (user) => {
         if (result.isConfirmed) {
           updateProfile(auth.currentUser, {
             displayName: result.value.userName,
-            photoURL: result.value.userPic
+            photoURL: result.value.userPic,
+            
           })
             .then(() => {
               Swal.fire('Success', 'Profile updated successfully!', 'success').then(() => {
