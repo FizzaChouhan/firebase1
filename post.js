@@ -50,42 +50,83 @@ let content = document.getElementById("postContent")
       document.getElementById("displayTitle").innerText = postTitle.value;
       document.getElementById("displayContent").innerText = content.value;
       document.getElementById("postForm").classList.add("hidden");
+
       document.getElementById("postDisplay").classList.remove("hidden");
 
+     let getposts= document.createElement("button")
+     getposts.setAttribute("id","allpost")
+     getposts.setAttribute("class","w-full bg-blue-500 text-white font-semibold p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-10")
+     getposts.textContent="Get All Post"
+     let postDisplay = document.getElementById("postDisplay")
+     postDisplay.appendChild(getposts)
+     //let getpost = document.getElementById("allpost")
+
+     getposts.addEventListener("click",async()=>{
+      
+      
+         try {
+             // const docRef = await addDoc(collection(db, "posts"), {
+             //  inputs:inputs.value,
+             //  text:text.value
+             
+             const querySnapshot = await getDocs(collection(db, "posts"));
+             let postsContainer=document.getElementById("postDisplay")
+     postsContainer.innerHTML = "";
+             querySnapshot.forEach((doc) => {
+             let docss=`${doc.id} => ${doc.data()}`
+             let postData = doc.data();
+             let postElement = document.createElement("div")
+             postElement.classList = "bg-white shadow-lg rounded-lg p-6 mb-4";
+     
+             postElement.innerHTML= `<h2 class="text-2xl font-semibold text-gray-800 mb-2">${postData.postTitle}</h2>
+             <p class="text-gray-700 mb-4">${postData.content}</p>
+             <span class="text-gray-500 text-sm">Post ID: ${doc.id}</span>
+         `;
+             postsContainer.appendChild(postElement)
+             
+             });
+          
+           } catch (e) {
+             console.error("Error adding document: ", e);
+           }
+         
+          
+     })
+     
   //location.href="showpost.js" 
 })
 
-let getpost = document.getElementById("allpost")
+// let getpost = document.getElementById("allpost")
 
-getpost.addEventListener("click",async()=>{
-    try {
-        // const docRef = await addDoc(collection(db, "posts"), {
-        //  inputs:inputs.value,
-        //  text:text.value
+// getpost.addEventListener("click",async()=>{
+//     try {
+//         // const docRef = await addDoc(collection(db, "posts"), {
+//         //  inputs:inputs.value,
+//         //  text:text.value
         
-        const querySnapshot = await getDocs(collection(db, "posts"));
-        let postsContainer=document.getElementById("postsContainer")
-postsContainer.innerHTML = "";
-        querySnapshot.forEach((doc) => {
-        let docss=`${doc.id} => ${doc.data()}`
-        let postData = doc.data();
-        let postElement = document.createElement("div")
-        postElement.classList = "bg-white shadow-lg rounded-lg p-6 mb-4";
+//         const querySnapshot = await getDocs(collection(db, "posts"));
+//         let postsContainer=document.getElementById("postsContainer")
+// postsContainer.innerHTML = "";
+//         querySnapshot.forEach((doc) => {
+//         let docss=`${doc.id} => ${doc.data()}`
+//         let postData = doc.data();
+//         let postElement = document.createElement("div")
+//         postElement.classList = "bg-white shadow-lg rounded-lg p-6 mb-4";
 
-        postElement.innerHTML= `<h2 class="text-2xl font-semibold text-gray-800 mb-2">${postData.postTitle}</h2>
-        <p class="text-gray-700 mb-4">${postData.content}</p>
-        <span class="text-gray-500 text-sm">Post ID: ${doc.id}</span>
-    `;
-        postsContainer.appendChild(postElement)
+//         postElement.innerHTML= `<h2 class="text-2xl font-semibold text-gray-800 mb-2">${postData.postTitle}</h2>
+//         <p class="text-gray-700 mb-4">${postData.content}</p>
+//         <span class="text-gray-500 text-sm">Post ID: ${doc.id}</span>
+//     `;
+//         postsContainer.appendChild(postElement)
         
-        });
+//         });
      
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
+//       } catch (e) {
+//         console.error("Error adding document: ", e);
+//       }
     
      
-})
+// })
 
 let delpost= document.getElementById("delpost")
 delpost.addEventListener("click",async()=>{
