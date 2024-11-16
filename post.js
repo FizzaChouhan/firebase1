@@ -92,7 +92,39 @@ let content = document.getElementById("postContent")
          
           
      })
+     let delpost= document.createElement("button")
+     delpost.setAttribute("id","delpost")
+     delpost.setAttribute("class","w-full bg-blue-500 text-white font-semibold p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-10")
+     delpost.textContent="Delete Post"
+    // let postDisplay = document.getElementById("postDisplay")
+     postDisplay.appendChild(delpost)
+     delpost.addEventListener("click",async()=>{
      
+      try {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        if (user) {
+          const uid = user.uid;
+          await deleteDoc(doc(db, "posts", uid));
+          console.log("Document deleted for user with ID:", uid);
+         // const postElement=document.getElementById(`post-${uid}`)
+         
+         let postDisplay= document.getElementById("postDisplay")
+         
+         postDisplay.innerHTML="";
+         
+        } 
+           
+        //   }else{
+        //     console.log("Post element not found")
+        //   }
+        // } else {
+        //   console.log("No user is signed in.");
+        // }
+      } catch (e) {
+        console.error("Error deleting document:", e);
+      }
+    });
   //location.href="showpost.js" 
 })
 
@@ -128,22 +160,22 @@ let content = document.getElementById("postContent")
      
 // })
 
-let delpost= document.getElementById("delpost")
-delpost.addEventListener("click",async()=>{
-  try {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    if (user) {
-      const uid = user.uid;
-      await deleteDoc(doc(db, "posts", uid));
-      console.log("Document deleted for user with ID:", uid);
-    } else {
-      console.log("No user is signed in.");
-    }
-  } catch (e) {
-    console.error("Error deleting document:", e);
-  }
-});
+// let delpost= document.getElementById("delpost")
+// delpost.addEventListener("click",async()=>{
+//   try {
+//     const auth = getAuth();
+//     const user = auth.currentUser;
+//     if (user) {
+//       const uid = user.uid;
+//       await deleteDoc(doc(db, "posts", uid));
+//       console.log("Document deleted for user with ID:", uid);
+//     } else {
+//       console.log("No user is signed in.");
+//     }
+//   } catch (e) {
+//     console.error("Error deleting document:", e);
+//   }
+// });
 
     
 let updpost = document.getElementById("updpost");
