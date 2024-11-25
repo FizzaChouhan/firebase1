@@ -104,4 +104,8 @@ googleBtn.addEventListener("click",()=>{
   });
 
 })
+let signInBtn=document.getElementById("directSignIn")
+signInBtn.addEventListener("click",()=>{
+  location.href = "signin.html";
+  })
 
