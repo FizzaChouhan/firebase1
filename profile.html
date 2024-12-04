@@ -10,12 +10,152 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
  
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
 
 
 </head>
 <body>
    <div id="profile-page"></div>
+ <!-- Navbar -->
+ <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand text-primary fw-bold" href="#">MyDashboard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- Search Bar -->
+        <form class="d-flex mx-auto w-50">
+          <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search" id="searchQuery"  >
+        </form>
+        <!-- User Actions -->
+        <div class="d-flex align-items-center">
+          <button class="btn btn-primary me-3" id="register"
+          >Login/register</button>
+          <img src="https://via.placeholder.com/40" alt="User Avatar" class="rounded-circle">
+        </div>
+      </div>
+    </div>
+  </nav>
 
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav class="col-md-2 d-none d-md-block sidebar">
+        <div class="p-3">
+          <h4 class="text-white">Menu</h4>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link text-white py-2" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white py-2" href="#">Analytics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white py-2" href="#">Settings</a>
+            </li>
+          </ul>
+          <button class="btn btn-danger w-100 mt-3" id="signOut">Log Out</button>
+        </div>
+      </nav>
+
+       <!-- Main Content -->
+       <main class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-4 border-bottom">
+          <h1 class="h2">Dashboard Overview</h1>
+          <button class="btn btn-primary" id="posted">Add New</button>
+        </div>
+
+        <!-- Cards -->
+        <div class="row">
+          <div class="col-md-3">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">IT</h5>
+                <p class="card-text">New Updates</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Politics</h5>
+                <p class="card-text">Breaking News</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Economy</h5>
+                <p class="card-text">Going Down</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Education</h5>
+                <p class="card-text">SSC Part1 Results</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive mt-4 shadow-sm">
+          <table class="table table-striped">
+            <thead class="table-primary">
+              <tr>
+                Just now · Public
+                💻 Exploring the World of Information Technology 🌐
+                
+                IT has come a long way in shaping the way we live and work! From cloud computing and artificial intelligence to cybersecurity and blockchain, the advancements in technology are truly game-changing. 🚀
+                
+                Every day, IT professionals are solving complex problems, creating innovative solutions, and building the digital world we rely on. Whether it’s creating user-friendly apps, securing online data, or improving business operations, IT is everywhere!
+                
+                Feeling inspired by the endless possibilities that technology offers. If you’re considering a career in IT, now is the perfect time to dive in! 💡
+                
+                What part of IT are you most excited about? Let me know in the comments! 🔍
+                
+                #InformationTechnology #TechRevolution #Innovation #Coding #FutureOfIT #TechCareer #AI #Cybersecurity #CloudComputing
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <br>
+                [Abid]
+                Just now · Public
+                📚 The Power of Education 🎓
+                
+                Education is the key to unlocking countless opportunities! 🌟 Whether it's learning new skills, gaining knowledge in a specific field, or simply exploring the world around us, education has the power to transform lives.
+                
+                The world is changing fast, and the more we learn, the better we can adapt and thrive in this ever-evolving environment. 💡 From traditional classrooms to online courses and self-paced learning, there are endless ways to expand our minds.
+                
+                Never stop learning, because education is not just about textbooks—it's about gaining perspective, building confidence, and making a difference in the world! 🌍
+                
+                Let’s keep pushing for better education systems everywhere! ✨
+                
+                What’s one thing you’ve learned recently that has impacted your life? Share your thoughts! 💬
+                
+                #EducationMatters #NeverStopLearning #LifelongLearning #EmpowerThroughEducation #FutureOfEducation #LearningJourney #KnowledgeIsPower
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="profile.js"></script>
+    <script type="module" src="post.js"></script>
+    <script></script>
 </body>
 </html>

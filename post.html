@@ -27,37 +27,57 @@
             <textarea id="postContent" name="postContent" rows="8" placeholder="Write something amazing..." 
                       class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
           </div>
-          
+           <!-- Category Selection -->
+    <select id="postCategory">
+      <option value="Education">Education</option>
+      <option value="IT">IT</option>
+      <option value="Economics">Economy</option>
+      <option value="Politics">Politics</option>
+      
+  </select>
           <!-- Submit Button -->
           <button type="button" 
-                  class="w-full bg-blue-500 text-white font-semibold p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" id="post">
-            Post
+                  class="w-full bg-blue-500 text-white font-semibold p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" id="addpost">
+           Add Post
           </button>
 
           <!-- Get all post  -->
-          <button type="button" 
+           <button type="button" 
           class="w-full bg-blue-500 text-white font-semibold p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-10" id="allpost">
     Get all Post
   </button>
-  <div id="postsContainer" class="max-w-2xl mx-auto"></div>
+  <div id="postsContainer" class="max-w-2xl mx-auto"></div> 
    <!-- delete post  -->
    <button type="button" 
    class="w-full bg-blue-500 text-white font-semibold p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-10" id="delpost">
 Delete Post
-</button>
-<!-- update post  -->
+</button> 
+ <!-- update post  -->
 <button type="button" 
 class="w-full bg-blue-500 text-white font-semibold p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-10" id="updpost">
 Update Post
 </button>
-        </form>
-      </div>
-       <!-- Display Area for the Submitted Post -->
+         </form>
+      </div> 
+        <!-- Display Area for the Submitted Post -->
     <div id="postDisplay" class="max-w-2xl w-full bg-white shadow-lg rounded-lg p-6 hidden post " >
       <h1 id="displayTitle" class="text-3xl font-semibold text-gray-800 mb-4"></h1>
       <p id="displayContent" class="text-gray-700 text-lg leading-relaxed"></p>
       <div id="postsContainer" class="max-w-2xl mx-auto"></div>
   </div>
+  <!-- Filter Posts by Category -->
+<select id="categoryFilter">
+  
+  <option value="Education">Education</option>
+  <option value="IT">IT</option>
+  <option value="Economics">Economics</option>
+  <option value="Politics">Politics</option>
+  
+</select>
+<button id="filterPosts">Filter Posts</button>
+
+<!-- Display Filtered Posts -->
+<div id="postsContainer"></div>
       <script type="module" src="post.js"></script>
       <script type="module" src="showpost.js"></script>
 </body>
